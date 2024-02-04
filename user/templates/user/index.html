@@ -1,0 +1,680 @@
+{% extends 'user/base.html' %}
+{% load static %}
+	
+	{% block main_block %}
+
+    {% if messages %}
+        {% for m in messages %}
+        <div class="alert alert-success d-flex align-items-center" role="alert">
+            <div>
+              {{m}}
+            </div>
+        </div>
+        {% endfor %}
+    {% endif %}
+
+	<!-- SignUp Modal-->
+	<div class="modal fade" id="reservationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+	  <div class="modal-content position-relative">
+		<div class="bg-primary position-absolute top-0 start-0 z-index-top">
+		  <button class="btn-close btn-close-white p-3 opacity-10" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body p-5">
+		  <header class="mb-5 text-center">
+			<h3 class="handwriting-text">Sign Up </h3>
+			<h5 class="text-uppercase text-gray-500 fw-normal">Eats and cheers with good company</h5>
+		  </header>
+		  <form class="p-lg-5" method="post" name="user_register" onsubmit="validateForm(event)">
+            {% csrf_token %}
+			<div class="row gy-3">
+			  <div class="col-lg-6">
+				<label class="form-label" for="modalResName"> Name</label>
+				<input class="form-control shadow-0 px-0 border-0 border-bottom" id="modalResName" type="text" name="name" required>
+			  </div>
+			  <div class="col-lg-6">
+				<label class="form-label" for="modalResEmail"> Email</label>
+				<input class="form-control shadow-0 px-0 border-0 border-bottom" id="modalResEmail" type="email" name="email" required>
+			  </div>
+			  <div class="col-lg-6">
+				<label class="form-label" for="modalResNumber">Phone Number</label>
+				<input class="form-control shadow-0 px-0 border-0 border-bottom" id="modalResNumber" type="text" name="phone" required>
+			  </div>
+			  <div class="col-lg-6">
+				<label class="form-label" for="modalResPeople">Street Address</label>
+				<input class="form-control shadow-0 px-0 border-0 border-bottom" id="modalResPeople" type="text" name="street_address" required>
+			  </div>
+			  <div class="col-lg-12">
+				<label class="form-label" for="modalResDate">City</label>
+				<input class="form-control shadow-0 px-0 border-0 border-bottom" id="modalResDate" type="text" name="city" required>
+			  </div>
+			  <div class="col-lg-12">
+				<label class="form-label" for="modalRequest">Pincode</label>
+				<input class="form-control shadow-0 px-0 border-0 border-bottom" id="modalRequest" type="number" name="pincode" required>
+			  </div>
+			  <div class="col-lg-12">
+				  <label class="form-label" for="modalRequest">Username</label>
+				  <input class="form-control shadow-0 px-0 border-0 border-bottom" id="modalRequest" type="text" name="username" required>
+			  </div>
+			  <div class="col-lg-12">
+				  <label class="form-label" for="modalRequest">Password</label>
+				  <input class="form-control shadow-0 px-0 border-0 border-bottom" id="modalRequest" type="password" name="password1" required>
+			  </div>
+			  <div class="col-lg-12">
+				  <label class="form-label" for="modalRequest">Confirm Password</label>
+				  <input class="form-control shadow-0 px-0 border-0 border-bottom" id="modalRequest" type="password" name="password2" required>
+			  </div>
+			  <div class="col-lg-12 text-center">
+				<button class="btn btn-primary" type="submit">Signup now</button>
+			  </div>
+			</div>
+		  </form>
+		</div>
+	  </div>
+	</div>
+  	</div>
+
+    
+  	<!-- Hero Section-->
+  	<section class="text-white p-0" id="hero">
+		<div class="swiper hero-slider" id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+		  <div class="swiper-wrapper">
+			<div class="swiper-slide h-auto carousel-item" data-bs-interval="500">
+			  <div class="hero-slide bg-center bg-cover" style="background-image: url(/user/static/base_page/img/hero-bg.jpg);">
+				<div class="container pe-5">
+				  <h2 class="handwriting-text" data-swiper-parallax="-200">This is <span class="text-primary">FoodSync</span></h2>
+				  <h3 class="handwriting-text" data-swiper-parallax="-300">Where every detail is designed to delight your senses</h1>
+				  <p class="hero-text lh-3" data-swiper-parallax="-400">Discover a world of flavors, one bite <a href="https://bootstraptemple.com/" target="_blank">at a time</a></p>
+                  {% if not user.is_authenticated %}
+				  <a href="{% url 'user_signin' %}"><button id="signInButton" class="btn btn-primary d-none d-lg-inline-block" type="button" data-bs-toggle="modal" data-bs-target="#reservationModal">SignIn</button></a>
+                  {% endif %}
+				</div>
+			  </div>
+			</div>
+			<div class="swiper-slide h-auto carousel-item active" data-bs-interval="400">
+			  <div class="hero-slide bg-center bg-cover" style="background-image: url(/user/static/base_page/img/hero-bg02.jpg);">
+				<div class="container pe-5">
+				  <h1 class="handwriting-text" data-swiper-parallax="-200">Lights down low, spirits high</h1>
+				  <p class="hero-text lh-3" data-swiper-parallax="-400">Ready to embark on a flavor-filled adventure?</p>
+				  {% if not user.is_authenticated %}
+				  <a href="{% url 'user_signin' %}"><button id="signInButton" class="btn btn-primary d-none d-lg-inline-block" type="button" data-bs-toggle="modal" data-bs-target="#reservationModal">SignIn</button></a>
+                  {% endif %}
+				</div>
+			  </div>
+			</div>
+			<div class="swiper-slide h-auto carousel-item">
+			  <div class="hero-slide bg-center bg-cover" style="background-image: url(/user/static/base_page/img/hero-bg03.jpg);">
+				<div class="container pe-5">
+				  <h2 class="handwriting-text" data-swiper-parallax="-200">Visit <span class="text-primary">FoodSync</span></h2>
+				  <h2 class="handwriting-text" data-swiper-parallax="-300">Fresh flavors, fresh beginnings. Join us!</h1>
+				  <p class="hero-text lh-3" data-swiper-parallax="-400">Cheers to beginnings, bites, and bonding</p>
+				  {% if not user.is_authenticated %}
+				  <a href="{% url 'user_signin' %}"><button id="signInButton" class="btn btn-primary d-none d-lg-inline-block" type="button" data-bs-toggle="modal" data-bs-target="#reservationModal">SignIn</button></a>
+                  {% endif %}
+				</div>
+			  </div>
+			</div>
+		  </div>
+		  <!-- slider pagination-->
+		  <div class="swiper-pagination p-3 text-end"></div>
+		</div><a class="scroll-down d-none d-sm-block" href="#restaurants"></a>
+		<!-- social icons menu-->
+		<div class="hero-social d-none d-xl-flex">
+		  <ul class="list-inline mb-0">
+			<li class="list-inline-item"><a class="text-reset" href="#!"><i class="fab fa-facebook-f"></i></a></li>
+			<li class="list-inline-item"><a class="text-reset" href="#!"><i class="fab fa-twitter"></i></a></li>
+			<li class="list-inline-item"><a class="text-reset" href="#!"><i class="fab fa-instagram"></i></a></li>
+			<li class="list-inline-item"><a class="text-reset" href="#!"><i class="fab fa-pinterest"></i></a></li>
+		  </ul><span class="line"></span><span class="text-uppercase">Follow us</span>
+		</div>
+  	</section>
+
+	<!-- Restaurant Section -->
+  	<section class="bg-light" id="restaurants">
+		<div class="container text-center">
+		  <header class="mb-5">
+			<h2 class="handwriting-text">Restaurants</h2>
+			<h5 class="text-uppercase text-gray-500 fw-normal">Fresh and healthy food available</h5>
+		  </header>
+		  <div class="row gy-4 mt-5">
+			{% for r in restaurant %}
+			<div class="col-md-4">
+			  <div class="card border-0 shadow h-100">
+				<a href="{% url 'user_restaurant_detail' r.id %}">
+					<div class="card-body p-lg-5 position-relative">
+					  	<img class="img-fluid d-block mx-auto mb-3 mt-4" src="{{ r.image.url }}" alt="Dish Name" width="200">
+					  	<h5 class="text-uppercase">{{r.name}}</h5>
+					  	<small class="text-muted">{{r.street_address}}, {{r.city}}</small>
+					</div>
+				</a>
+			  </div>
+			</div>
+			{% endfor %}
+		  </div>
+		</div>
+  	</section>
+	<!-- Restaurant Section End-->
+
+  	<!-- Menu Section-->
+  	<section id="menu" class="bg-light">
+		  <div class="container">
+			<header class="text-center mb-5">
+			  <h2 class="handwriting-text">Menu</h2>
+			  <h5 class="text-uppercase text-gray-500 fw-normal">Delicious Foods</h5>
+			</header>
+			<div class="p-1">
+			  <ul class="nav nav-pills justify-content-center border border-2 border-white p-3" id="foodMenu" role="tablist">
+				{% for cat in categories %}
+				<li class="nav-item" role="presentation">
+				  <button class="nav-link text-uppercase active" id="breakfast-tab" data-bs-toggle="tab" data-bs-target="#breakfast" type="button" role="tab" aria-controls="breakfast" aria-selected="true">{{cat.name}}</button>
+				</li>
+				{% endfor %}
+				<!-- <li class="nav-item" role="presentation">
+				  <button class="nav-link text-uppercase" id="lunch-tab" data-bs-toggle="tab" data-bs-target="#lunch" type="button" role="tab" aria-controls="lunch" aria-selected="false">lunch</button>
+				</li>
+				<li class="nav-item" role="presentation">
+				  <button class="nav-link text-uppercase" id="party-tab" data-bs-toggle="tab" data-bs-target="#party" type="button" role="tab" aria-controls="party" aria-selected="false">party</button>
+				</li>
+				<li class="nav-item" role="presentation">
+				  <button class="nav-link text-uppercase" id="drinks-tab" data-bs-toggle="tab" data-bs-target="#drinks" type="button" role="tab" aria-controls="drinks" aria-selected="false">drinks</button>
+				</li> -->
+			  </ul>
+			</div>
+			<div class="tab-content bg-light" id="foodMenuContent">
+			  <div class="tab-pane fade show active" id="breakfast" role="tabpanel" aria-labelledby="breakfast-tab">
+				  <div class="row gy-4 mt-5">
+					{% for i in items %}
+					  <div class="col-md-4">
+						<div class="card border-0 shadow h-100">
+						  <div class="card-body p-lg-5 d-flex flex-column">
+							<div class="px-3 position-absolute top-0 end-0 translate-middle">
+
+							{% for o in i.offer_set.all %}
+							  	<div class="icon icon-md bg-primary border border-primary">
+									<h6 class="text-white mb-0 lh-1 text-uppercase">{{o.offer_percentage}}% <br> off</h6>
+							  	</div>	
+							{% endfor %}
+
+							</div>
+							<img class="img-fluid d-block mx-auto mb-3 mt-4" src="{{ i.image.url }}" alt="Dish Name" width="200" height="150px">
+							<h5 class="text-uppercase">{{i.name}} </h5>
+							<ul class="list-unstyled mb-0">
+							
+							  	<li class="text-primary lead fw-bold text-sm">{{i.restaurant}}</li>
+							  	<li class="text-muted lead fw-bold text-sm"> </li>
+								
+							</ul>
+							<div class="mt-2">
+								<h5><i class="fa-solid fa-indian-rupee-sign fa-xs" style="color: #000000;"></i> {{i.price}}</h5>
+							</div>
+							<div class="d-flex justify-content-center align-items-end">
+								{% if i.is_active == 1 %}
+									<a href="{% url 'add_to_cart' i.id %}"><button class="btn btn-outline-dark">Add To Cart</button></a>
+									{% else %}
+									<button disabled class="btn btn-outline-dark">Out Of Stock</button>
+								{% endif %}
+							</div>
+						  </div>
+						</div>
+					  </div>
+					{% endfor %}
+					  <!-- <div class="col-md-4">
+						<div class="card border-0">
+						  <div class="card-body p-lg-5 position-relative">
+							<div class="px-3 position-absolute top-0 end-0 translate-middle">
+							  <div class="icon icon-md bg-primary border border-primary">
+								<h6 class="text-white mb-0 lh-1 text-uppercase">40% <br> off</h6>
+							  </div>
+							</div><img class="img-fluid d-block mx-auto mb-3 mt-4" src="{% static 'base_page/img/dish-d.png' %}" alt="Dish Name" width="200">
+							<h5 class="text-uppercase">Dish Name </h5>
+							<ul class="list-unstyled mb-0">
+							  <li class="text-primary lead price-formatted fw-bold text-sm">50000 </li>
+							  <li class="text-muted lead price-formatted fw-bold text-sm text-line-through">30000 </li>
+							</ul>
+						  </div>
+						</div>
+					  </div>
+					  <div class="col-md-4">
+						<div class="card border-0">
+						  <div class="card-body p-lg-5 position-relative">
+							<div class="px-3 position-absolute top-0 end-0 translate-middle">
+							  <div class="icon icon-md bg-primary border border-primary">
+								<h6 class="text-white mb-0 lh-1 text-uppercase">40% <br> off</h6>
+							  </div>
+							</div><img class="img-fluid d-block mx-auto mb-3 mt-4" src="{% static 'base_page/img/dish-d.png' %}" alt="Dish Name" width="200">
+							<h5 class="text-uppercase">Dish Name </h5>
+							<ul class="list-unstyled mb-0">
+							  <li class="text-primary lead price-formatted fw-bold text-sm">50000 </li>
+							  <li class="text-muted lead price-formatted fw-bold text-sm text-line-through">30000 </li>
+							</ul>
+						  </div>
+						</div>
+					  </div> -->
+				  </div>
+			  </div>
+			  <!-- <div class="tab-pane fade" id="lunch" role="tabpanel" aria-labelledby="lunch-tab">
+				  <div class="row gy-4 mt-5">
+					  <div class="col-md-4">
+						<div class="card border-0">
+						  <div class="card-body p-lg-5 position-relative">
+							<div class="px-3 position-absolute top-0 end-0 translate-middle">
+							  <div class="icon icon-md bg-primary border border-primary">
+								<h6 class="text-white mb-0 lh-1 text-uppercase">40% <br> off</h6>
+							  </div>
+							</div><img class="img-fluid d-block mx-auto mb-3 mt-4" src="{% static 'base_page/img/dish-d.png' %}" alt="Dish Name" width="200">
+							<h5 class="text-uppercase">Dish Name </h5>
+							<ul class="list-unstyled mb-0">
+							  <li class="text-primary lead price-formatted fw-bold text-sm">50000 </li>
+							  <li class="text-muted lead price-formatted fw-bold text-sm text-line-through">30000 </li>
+							</ul>
+						  </div>
+						</div>
+					  </div>
+					  <div class="col-md-4">
+						<div class="card border-0">
+						  <div class="card-body p-lg-5 position-relative">
+							<div class="px-3 position-absolute top-0 end-0 translate-middle">
+							  <div class="icon icon-md bg-primary border border-primary">
+								<h6 class="text-white mb-0 lh-1 text-uppercase">40% <br> off</h6>
+							  </div>
+							</div><img class="img-fluid d-block mx-auto mb-3 mt-4" src="{% static 'base_page/img/dish-d.png' %}" alt="Dish Name" width="200">
+							<h5 class="text-uppercase">Dish Name </h5>
+							<ul class="list-unstyled mb-0">
+							  <li class="text-primary lead price-formatted fw-bold text-sm">50000 </li>
+							  <li class="text-muted lead price-formatted fw-bold text-sm text-line-through">30000 </li>
+							</ul>
+						  </div>
+						</div>
+					  </div>
+					  <div class="col-md-4">
+						<div class="card border-0">
+						  <div class="card-body p-lg-5 position-relative">
+							<div class="px-3 position-absolute top-0 end-0 translate-middle">
+							  <div class="icon icon-md bg-primary border border-primary">
+								<h6 class="text-white mb-0 lh-1 text-uppercase">40% <br> off</h6>
+							  </div>
+							</div><img class="img-fluid d-block mx-auto mb-3 mt-4" src="{% static 'base_page/img/dish-d.png' %}" alt="Dish Name" width="200">
+							<h5 class="text-uppercase">Dish Name </h5>
+							<ul class="list-unstyled mb-0">
+							  <li class="text-primary lead price-formatted fw-bold text-sm">50000 </li>
+							  <li class="text-muted lead price-formatted fw-bold text-sm text-line-through">30000 </li>
+							</ul>
+						  </div>
+						</div>
+					  </div>
+				  </div>
+			  </div>
+			  <div class="tab-pane fade" id="dinner" role="tabpanel" aria-labelledby="dinner-tab">
+				  <div class="row gy-4 mt-5">
+					  <div class="col-md-4">
+						<div class="card border-0">
+						  <div class="card-body p-lg-5 position-relative">
+							<div class="px-3 position-absolute top-0 end-0 translate-middle">
+							  <div class="icon icon-md bg-primary border border-primary">
+								<h6 class="text-white mb-0 lh-1 text-uppercase">40% <br> off</h6>
+							  </div>
+							</div><img class="img-fluid d-block mx-auto mb-3 mt-4" src="{% static 'base_page/img/dish-d.png' %}" alt="Dish Name" width="200">
+							<h5 class="text-uppercase">Dish Name </h5>
+							<ul class="list-unstyled mb-0">
+							  <li class="text-primary lead price-formatted fw-bold text-sm">50000 </li>
+							  <li class="text-muted lead price-formatted fw-bold text-sm text-line-through">30000 </li>
+							</ul>
+						  </div>
+						</div>
+					  </div>
+					  <div class="col-md-4">
+						<div class="card border-0">
+						  <div class="card-body p-lg-5 position-relative">
+							<div class="px-3 position-absolute top-0 end-0 translate-middle">
+							  <div class="icon icon-md bg-primary border border-primary">
+								<h6 class="text-white mb-0 lh-1 text-uppercase">40% <br> off</h6>
+							  </div>
+							</div><img class="img-fluid d-block mx-auto mb-3 mt-4" src="{% static 'base_page/img/dish-d.png' %}" alt="Dish Name" width="200">
+							<h5 class="text-uppercase">Dish Name </h5>
+							<ul class="list-unstyled mb-0">
+							  <li class="text-primary lead price-formatted fw-bold text-sm">50000 </li>
+							  <li class="text-muted lead price-formatted fw-bold text-sm text-line-through">30000 </li>
+							</ul>
+						  </div>
+						</div>
+					  </div>
+					  <div class="col-md-4">
+						<div class="card border-0">
+						  <div class="card-body p-lg-5 position-relative">
+							<div class="px-3 position-absolute top-0 end-0 translate-middle">
+							  <div class="icon icon-md bg-primary border border-primary">
+								<h6 class="text-white mb-0 lh-1 text-uppercase">40% <br> off</h6>
+							  </div>
+							</div><img class="img-fluid d-block mx-auto mb-3 mt-4" src="{% static 'base_page/img/dish-d.png' %}" alt="Dish Name" width="200">
+							<h5 class="text-uppercase">Dish Name </h5>
+							<ul class="list-unstyled mb-0">
+							  <li class="text-primary lead price-formatted fw-bold text-sm">50000 </li>
+							  <li class="text-muted lead price-formatted fw-bold text-sm text-line-through">30000 </li>
+							</ul>
+						  </div>
+						</div>
+					  </div>
+				  </div>
+			  </div>
+			  <div class="tab-pane fade" id="party" role="tabpanel" aria-labelledby="party-tab">
+				  <div class="row gy-4 mt-5">
+					  <div class="col-md-4">
+						<div class="card border-0">
+						  <div class="card-body p-lg-5 position-relative">
+							<div class="px-3 position-absolute top-0 end-0 translate-middle">
+							  <div class="icon icon-md bg-primary border border-primary">
+								<h6 class="text-white mb-0 lh-1 text-uppercase">40% <br> off</h6>
+							  </div>
+							</div><img class="img-fluid d-block mx-auto mb-3 mt-4" src="{% static 'base_page/img/dish-d.png' %}" alt="Dish Name" width="200">
+							<h5 class="text-uppercase">Dish Name </h5>
+							<ul class="list-unstyled mb-0">
+							  <li class="text-primary lead price-formatted fw-bold text-sm">50000 </li>
+							  <li class="text-muted lead price-formatted fw-bold text-sm text-line-through">30000 </li>
+							</ul>
+						  </div>
+						</div>
+					  </div>
+					  <div class="col-md-4">
+						<div class="card border-0">
+						  <div class="card-body p-lg-5 position-relative">
+							<div class="px-3 position-absolute top-0 end-0 translate-middle">
+							  <div class="icon icon-md bg-primary border border-primary">
+								<h6 class="text-white mb-0 lh-1 text-uppercase">40% <br> off</h6>
+							  </div>
+							</div><img class="img-fluid d-block mx-auto mb-3 mt-4" src="{% static 'base_page/img/dish-d.png' %}" alt="Dish Name" width="200">
+							<h5 class="text-uppercase">Dish Name </h5>
+							<ul class="list-unstyled mb-0">
+							  <li class="text-primary lead price-formatted fw-bold text-sm">50000 </li>
+							  <li class="text-muted lead price-formatted fw-bold text-sm text-line-through">30000 </li>
+							</ul>
+						  </div>
+						</div>
+					  </div>
+					  <div class="col-md-4">
+						<div class="card border-0">
+						  <div class="card-body p-lg-5 position-relative">
+							<div class="px-3 position-absolute top-0 end-0 translate-middle">
+							  <div class="icon icon-md bg-primary border border-primary">
+								<h6 class="text-white mb-0 lh-1 text-uppercase">40% <br> off</h6>
+							  </div>
+							</div><img class="img-fluid d-block mx-auto mb-3 mt-4" src="{% static 'base_page/img/dish-d.png' %}" alt="Dish Name" width="200">
+							<h5 class="text-uppercase">Dish Name </h5>
+							<ul class="list-unstyled mb-0">
+							  <li class="text-primary lead price-formatted fw-bold text-sm">50000 </li>
+							  <li class="text-muted lead price-formatted fw-bold text-sm text-line-through">30000 </li>
+							</ul>
+						  </div>
+						</div>
+					  </div>
+				  </div>
+			  </div>
+			  <div class="tab-pane fade" id="drinks" role="tabpanel" aria-labelledby="drinks-tab">
+				  <div class="row gy-4 mt-5">
+					  <div class="col-md-4">
+						<div class="card border-0">
+						  <div class="card-body p-lg-5 position-relative">
+							<div class="px-3 position-absolute top-0 end-0 translate-middle">
+							  <div class="icon icon-md bg-primary border border-primary">
+								<h6 class="text-white mb-0 lh-1 text-uppercase">40% <br> off</h6>
+							  </div>
+							</div><img class="img-fluid d-block mx-auto mb-3 mt-4" src="{% static 'base_page/img/dish-d.png' %}" alt="Dish Name" width="200">
+							<h5 class="text-uppercase">Dish Name </h5>
+							<ul class="list-unstyled mb-0">
+							  <li class="text-primary lead price-formatted fw-bold text-sm">50000 </li>
+							  <li class="text-muted lead price-formatted fw-bold text-sm text-line-through">30000 </li>
+							</ul>
+						  </div>
+						</div>
+					  </div>
+					  <div class="col-md-4">
+						<div class="card border-0">
+						  <div class="card-body p-lg-5 position-relative">
+							<div class="px-3 position-absolute top-0 end-0 translate-middle">
+							  <div class="icon icon-md bg-primary border border-primary">
+								<h6 class="text-white mb-0 lh-1 text-uppercase">40% <br> off</h6>
+							  </div>
+							</div><img class="img-fluid d-block mx-auto mb-3 mt-4" src="{% static 'base_page/img/dish-d.png' %}" alt="Dish Name" width="200">
+							<h5 class="text-uppercase">Dish Name </h5>
+							<ul class="list-unstyled mb-0">
+							  <li class="text-primary lead price-formatted fw-bold text-sm">50000 </li>
+							  <li class="text-muted lead price-formatted fw-bold text-sm text-line-through">30000 </li>
+							</ul>
+						  </div>
+						</div>
+					  </div>
+					  <div class="col-md-4">
+						<div class="card border-0">
+						  <div class="card-body p-lg-5 position-relative">
+							<div class="px-3 position-absolute top-0 end-0 translate-middle">
+							  <div class="icon icon-md bg-primary border border-primary">
+								<h6 class="text-white mb-0 lh-1 text-uppercase">40% <br> off</h6>
+							  </div>
+							</div><img class="img-fluid d-block mx-auto mb-3 mt-4" src="{% static 'base_page/img/dish-d.png' %}" alt="Dish Name" width="200">
+							<h5 class="text-uppercase">Dish Name </h5>
+							<ul class="list-unstyled mb-0">
+							  <li class="text-primary lead price-formatted fw-bold text-sm">50000 </li>
+							  <li class="text-muted lead price-formatted fw-bold text-sm text-line-through">30000 </li>
+							</ul>
+						  </div>
+						</div>
+					  </div>
+				  </div>
+			  </div> -->
+			</div>
+		  </div>
+  	</section>
+	<!-- End Menu Section -->
+
+  	<!-- Offers Section-->
+  	<section class="bg-light" id="offers">
+		<div class="container text-center">
+		  <header class="mb-5">
+			<h2 class="handwriting-text">Special Offers</h2>
+			<h5 class="text-uppercase text-gray-500 fw-normal">Don't miss our offers</h5>
+		  </header>
+		  <div class="row gy-4 mt-5">
+			{% for o in offers %}
+                  
+			<div class="col-md-4">
+			  <div class="card border-0 shadow h-100">
+				<div class="card-body p-lg-5 position-relative">
+				  <div class="px-3 position-absolute top-0 end-0 translate-middle">
+					<div class="icon icon-md bg-primary border border-primary">
+					  <h6 class="text-white mb-0 lh-1 text-uppercase">{{o.offer_percentage}}% <br> off</h6>
+					</div>
+				  </div><img class="img-fluid d-block mx-auto mb-3 mt-4" src="{{ o.item.image.url }}" alt="Dish Name" width="200">
+				  
+				  <h5 class="text-uppercase">{{o.item.name}} </h5>
+				  <ul class="list-unstyled mb-0">
+					<li class="text-primary lead fw-bold text-sm">{{o.item.restaurant}} </li>
+					<li class="text-muted lead fw-bold text-sm text-line-through">{{o.item.price}} </li>
+				  </ul>
+				  <div class="mt-2">
+					<h5><i class="fa-solid fa-indian-rupee-sign fa-xs" style="color: #000000;"></i> {{o.price}}</h5>
+				  </div>
+				  <div class="d-flex justify-content-center align-items-end">
+					{% if o.item.is_active == 1 %}
+						<a href="{% url 'add_to_cart' o.id %}"><button class="btn btn-outline-dark">Add To Cart</button></a>
+						{% else %}
+						<button disabled class="btn btn-outline-dark">Out Of Stock</button>
+					{% endif %}
+				  </div>
+				</div>
+			  </div>
+			</div>
+			{% endfor %}
+			
+			<!-- <div class="col-md-4">
+			  <div class="card border-0">
+				<div class="card-body p-lg-5 position-relative">
+				  <div class="px-3 position-absolute top-0 end-0 translate-middle">
+					<div class="icon icon-md bg-primary border border-primary">
+					  <h6 class="text-white mb-0 lh-1 text-uppercase">40% <br> off</h6>
+					</div>
+				  </div><img class="img-fluid d-block mx-auto mb-3 mt-4" src="{% static 'base_page/img/dish-d.png' %}" alt="Dish Name" width="200">
+				  <h5 class="text-uppercase">Dish Name </h5>
+				  <ul class="list-unstyled mb-0">
+					<li class="text-primary lead price-formatted fw-bold text-sm">50000 </li>
+					<li class="text-muted lead price-formatted fw-bold text-sm text-line-through">30000 </li>
+				  </ul>
+				</div>
+			  </div>
+			</div> -->
+			<!-- <div class="col-md-4">
+			  <div class="card border-0">
+				<div class="card-body p-lg-5 position-relative">
+				  <div class="px-3 position-absolute top-0 end-0 translate-middle">
+					<div class="icon icon-md bg-primary border border-primary">
+					  <h6 class="text-white mb-0 lh-1 text-uppercase">40% <br> off</h6>
+					</div>
+				  </div><img class="img-fluid d-block mx-auto mb-3 mt-4" src="{% static 'base_page/img/dish-d.png' %}" alt="Dish Name" width="200">
+				  <h5 class="text-uppercase">Dish Name </h5>
+				  <ul class="list-unstyled mb-0">
+					<li class="text-primary lead price-formatted fw-bold text-sm">50000 </li>
+					<li class="text-muted lead price-formatted fw-bold text-sm text-line-through">30000 </li>
+				  </ul>
+				</div>
+			  </div>
+			</div> -->
+		  </div>
+		</div>
+  	</section>
+  	<!-- End Offers Section-->
+
+  	<!-- Gallery Section-->
+  	<section id="gallery">
+		<div class="container text-center">
+		  <header class="mb-5">
+			<h2 class="handwriting-text">Our Gallery</h2>
+			<h5 class="text-uppercase text-gray-500 fw-normal">Discover the photo gallery</h5>
+		  </header>
+		  <div class="row g-0">
+			<!-- Item-->
+			<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+			  <div class="overlay-hover-primary"><img class="img-fluid" src="{% static 'base_page/img/bg01-small.jpg' %}" alt="image">
+				<div class="overlay-content p-1"><a class="glightbox d-block border border-2 border-white w-100 h-100 d-flex align-items-center justify-content-center text-white text-decoration-none" href="img/bg01.jpg" data-gallery="gallery" data-glightbox="Image Caption">
+					<div class="icon icon-md border border-white"><i class="fas fa-search fa-2x text-white"></i></div></a></div>
+			  </div>
+			</div>
+			<!-- Item-->
+			<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+			  <div class="overlay-hover-primary"><img class="img-fluid" src="{% static 'base_page/img/bg02-small.jpg' %}" alt="image">
+				<div class="overlay-content p-1"><a class="glightbox d-block border border-2 border-white w-100 h-100 d-flex align-items-center justify-content-center text-white text-decoration-none" href="img/bg02.jpg" data-gallery="gallery" data-glightbox="Image Caption">
+					<div class="icon icon-md border border-white"><i class="fas fa-search fa-2x text-white"></i></div></a></div>
+			  </div>
+			</div>
+			<!-- Item-->
+			<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+			  <div class="overlay-hover-primary"><img class="img-fluid" src="{% static 'base_page/img/bg03-small.jpg' %}" alt="image">
+				<div class="overlay-content p-1"><a class="glightbox d-block border border-2 border-white w-100 h-100 d-flex align-items-center justify-content-center text-white text-decoration-none" href="img/bg03.jpg" data-gallery="gallery" data-glightbox="Image Caption">
+					<div class="icon icon-md border border-white"><i class="fas fa-search fa-2x text-white"></i></div></a></div>
+			  </div>
+			</div>
+			<!-- Item-->
+			<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+			  <div class="overlay-hover-primary"><img class="img-fluid" src="{% static 'base_page/img/bg04-small.jpg' %}" alt="image">
+				<div class="overlay-content p-1"><a class="glightbox d-block border border-2 border-white w-100 h-100 d-flex align-items-center justify-content-center text-white text-decoration-none" href="img/bg04.jpg" data-gallery="gallery" data-glightbox="Image Caption">
+					<div class="icon icon-md border border-white"><i class="fas fa-search fa-2x text-white"></i></div></a></div>
+			  </div>
+			</div>
+			<!-- Item-->
+			<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+			  <div class="overlay-hover-primary"><img class="img-fluid" src="{% static 'base_page/img/bg05-small.jpg' %}" alt="image">
+				<div class="overlay-content p-1"><a class="glightbox d-block border border-2 border-white w-100 h-100 d-flex align-items-center justify-content-center text-white text-decoration-none" href="img/bg05.jpg" data-gallery="gallery" data-glightbox="Image Caption">
+					<div class="icon icon-md border border-white"><i class="fas fa-search fa-2x text-white"></i></div></a></div>
+			  </div>
+			</div>
+			<!-- Item-->
+			<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+			  <div class="overlay-hover-primary"><img class="img-fluid" src="{% static 'base_page/img/bg06-small.jpg' %}" alt="image">
+				<div class="overlay-content p-1"><a class="glightbox d-block border border-2 border-white w-100 h-100 d-flex align-items-center justify-content-center text-white text-decoration-none" href="img/bg06.jpg" data-gallery="gallery" data-glightbox="Image Caption">
+					<div class="icon icon-md border border-white"><i class="fas fa-search fa-2x text-white"></i></div></a></div>
+			  </div>
+			</div>
+			<!-- Item-->
+			<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+			  <div class="overlay-hover-primary"><img class="img-fluid" src="{% static 'base_page/img/bg04-small.jpg' %}" alt="image">
+				<div class="overlay-content p-1"><a class="glightbox d-block border border-2 border-white w-100 h-100 d-flex align-items-center justify-content-center text-white text-decoration-none" href="img/bg04.jpg" data-gallery="gallery" data-glightbox="Image Caption">
+					<div class="icon icon-md border border-white"><i class="fas fa-search fa-2x text-white"></i></div></a></div>
+			  </div>
+			</div>
+			<!-- Item-->
+			<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+			  <div class="overlay-hover-primary"><img class="img-fluid" src="{% static 'base_page/img/bg07-small.jpg' %}" alt="image">
+				<div class="overlay-content p-1"><a class="glightbox d-block border border-2 border-white w-100 h-100 d-flex align-items-center justify-content-center text-white text-decoration-none" href="img/bg07.jpg" data-gallery="gallery" data-glightbox="Image Caption">
+					<div class="icon icon-md border border-white"><i class="fas fa-search fa-2x text-white"></i></div></a></div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+  	</section>
+  	<!-- End Gallery Section-->
+
+  	<!-- About Section-->
+  	<section class="bg-light" id="about">
+		  <div class="container text-center">
+			<header class="mb-5">
+			  <h2 class="handwriting-text">About Restaurant</h2>
+			  <h5 class="text-uppercase text-gray-500 fw-normal">Check our story</h5>
+			</header>
+			<div class="row">
+			  <div class="col-lg-10 mx-auto">
+				<p class="lead text-muted mb-0">
+					Launched in 2024, Our technology platform connects customers and restaurant partners serving their multiple needs. 
+					Customers use our platform to search and discover restaurants, read and write customer generated reviews, order food 
+					and make payments online. 
+					On the other hand, we provide restaurant partners with industry-specific marketing tools which enable them to engage and 
+					acquire customers to grow their business. We also operate a one-stop procurement solution, Hyperpure, which supplies high quality 
+					ingredients and kitchen products to restaurant partners.
+				</p>
+			  </div>
+			</div>
+		  </div>
+	</section>
+  	<!-- End About Section-->
+
+  	<!-- Services Section-->
+  	<section id="services">
+		<div class="container text-center">
+		  <header class="mb-5">
+			<h2 class="handwriting-text">We provide the following</h2>
+			<h5 class="text-uppercase text-gray-500 fw-normal">Our Specialities</h5>
+		  </header>
+		  <div class="row gy-4">
+			<!-- item-->
+			<div class="hover-icon-primary col-md-4">
+			  <div class="icon mb-4 mx-auto"><i class="far fa-heart"></i></div>
+			  <h5 class="text-uppercase">Clean Food</h5>
+			  <p class="mb-0 text-muted">
+				Highlight the freshness of the ingredients to emphasize their quality and nutritional value.
+				Convey the idea that the food is made from natural, unprocessed ingredients that contribute to overall well-being.
+				Use the term "clean label" to signify a commitment to transparency and simplicity in the ingredient list, without hidden or unnecessary additives.
+			  </p>
+			</div>
+			<div class="hover-icon-primary col-md-4">
+			  <div class="icon mb-4 mx-auto"><i class="fas fa-user-tie"></i></div>
+			  <h5 class="text-uppercase">Lovely &amp; expert Restaurant's</h5>
+			  <p class="mb-0 text-muted">
+				Emphasize the culinary expertise of the chefs, showcasing their skill in creating delicious and artfully presented dishes.
+				Highlight any artisanal or handcrafted elements in the menu, showcasing a commitment to quality ingredients and attention to detail.
+				If the restaurant incorporates seasonal ingredients, celebrate the changing menu that reflects the freshest and best flavors of each season.
+
+			  </p>
+			</div>
+			<div class="hover-icon-primary col-md-4">
+			  <div class="icon mb-4 mx-auto"><i class="fas fa-hamburger"></i></div>
+			  <h5 class="text-uppercase">Fresh and tasty food</h5>
+			  <p class="mb-0 text-muted">
+				Describe the food as having crisp, vibrant flavors that showcase the freshness of the ingredients.
+				Emphasize a commitment to daily or regular sourcing of fresh produce, ensuring that each dish is made with the freshest ingredients available.
+				Showcase dishes inspired by local culinary traditions, using fresh, local ingredients to create a connection to the community.
+			  </p>
+			</div>
+		  </div>
+		</div>
+  	</section>
+  	<!-- End Services Section-->
+
+	<script src="{% static 'index_page/validate.js' %}"></script>
+    
+	{% endblock %}

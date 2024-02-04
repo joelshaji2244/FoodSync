@@ -1,0 +1,24 @@
+/*
+*
+* ==========================================
+* CUSTOM UTIL CLASSES
+* ==========================================
+*
+*/
+.login,
+.image {
+  min-height: 100vh;
+}
+
+.bg-image {
+  background-image: url('./loginpage.png');
+  background-size: cover;
+  background-position: center center;
+}
+.btn{
+  background-color: #7fb401;
+  color: white;
+}
+.display-4{
+  color: #7fb401;
+}

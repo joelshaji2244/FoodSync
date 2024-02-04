@@ -1,0 +1,58 @@
+{% extends 'restaurant/base.html' %}
+{% block main_block %}
+
+
+<div class="container-fluid" style="margin-top: 120px;">
+  {% if messages %}
+  {% for m in messages %}
+  <div class="alert alert-success d-flex align-items-center" role="alert">
+      <div>
+        {{m}}
+      </div>
+  </div>
+  {% endfor %}
+{% endif %}
+    <div class="row">
+      <div class="col-1"></div>
+        <div class="col-10">
+          <div class="card mb-3" style="max-width: 100%;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="{{ item.image.url }}" class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{item.name}}</h5>
+                  <p class="card-text">{{item.category}}</p>
+                  <p>Price : {{item.price}}</p>
+                  <div class="mb-2">
+                    <a href="{% url 'offer_add' item.id %}" class="btn btn-outline-danger btn-sm">ADD OFFER</a>
+                  </div>
+                  <table class="table">
+                    <thead>
+                      <th>Offer Price</th>
+                      <th>Start date</th>
+                      <th>End date</th>
+                      <th>Action</th>
+                    </thead>
+                    {% for o in item.offer_set.all %}
+                      <tbody>
+                        <td>{{o.price}}</td>
+                        <td>{{o.start_date |date:"SHORT_DATE_FORMAT" }}</td>
+                        <td>{{o.end_date |date:"SHORT_DATE_FORMAT"  }}</td>
+                        <td>
+                          <a href="{% url 'offer_delete' o.id %}"><i class="fa-solid fa-trash fa-lg" style="color: #b30000;"></i></a>
+                        </td>
+                      </tbody>
+                    {% endfor %}
+                  </table>
+                </div> 
+              </div>
+              
+            </div>
+        </div>
+      </div>
+      <div class="col-1"></div>
+    </div>
+</div>
+{% endblock %}

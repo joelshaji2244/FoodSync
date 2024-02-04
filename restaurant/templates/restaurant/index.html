@@ -1,0 +1,50 @@
+{% extends 'restaurant/base.html' %}
+{% load static %}
+
+    {% block main_block %}
+    
+    <header class="masthead">
+        <div class="container">
+            <div class="masthead-subheading">Welcome To <span style="color: #ffc800;">{{user.restaurant.name}}</span></div>
+        </div>
+    </header>
+    <!-- Category -->
+    <section class="page-section bg-light" id="portfolio">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Category</h2>
+            </div>
+            <div class="row mt-4">
+                {% for c in category %}
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <div class="portfolio-item">
+                            <a href="{% url 'category_list' c.id %}">
+                            <img src="{{ c.image.url }}" alt="" height="300px" class="w-100">
+                            <div class="portfolio-caption">
+                                <div class="text-black portfolio-caption-heading">{{c.name}}</div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- Category End -->
+    <section>
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Gallery</h2>
+            </div>
+            <div class="card-group mt-4">
+                {% for i in image %}
+                <div class="card border-0 p-1">
+                  <img src="{{i.image.url}}" class="card-img-top" alt="..." height="260px">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    
+
+    {% endblock %}

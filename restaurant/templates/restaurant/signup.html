@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'signup/css/style.css' %}">
+    
+</head>
+<body>
+
+    <div class="main">
+        <div class="container">
+            <div class="signup-content">
+                <div class="signup-img">
+                    <img src="{% static 'signup/images/signup2.png' %}" alt="">
+                </div>
+                <div class="signup-form">
+                    <form method="post" class="register-form" name="rest_registration" onsubmit="validateForm(event)" id="register-form" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <h2>Restaurant registration</h2>
+                        <div class="form-group">
+                            
+                            <label for="name">Restaurant Name :</label>
+                            <input type="text" name="name" id="name" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                
+                                <label for="email">Email :</label>
+                                <input type="email" name="email" id="email" required/>
+                            </div>
+                            <div class="form-group">
+                                
+                                <label for="phone">Phone Number :</label>
+                                <input type="text" name="phone" id="phone" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            
+                            <label for="address">Address :</label>
+                            <input type="text" name="street_address" id="address" required/>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                            
+                            <label for="city">City :</label>
+                            <input type="text" name="city" id="city" required/>
+                            </div>
+                            <div class="form-group">
+                            
+                            <label for="pincode">PIN Code :</label>
+                            <input type="text" name="pincode" id="pincode" required/>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                
+                                <label for="pincode">Date Joined :</label>
+                                {{form.date_joined}}
+                            </div>
+                            <div class="form-group">
+                                
+                                <label for="image">Image :</label>
+                                <input class="form-control" type="file" name="image" id="image" required/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            
+                            <label for="licence_number">License Number :</label>
+                            <input type="number" name="licence_number" id="licence_number" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                            
+                            <label for="username">Username :</label>
+                            <input type="text" name="username" id="username" required/>
+                            </div>
+                            <div class="form-group">
+                            
+                            <label for="password1">Password :</label>
+                            <input type="password" name="password1" id="password1" required/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            
+                            <label for="password2">Confirm Password :</label>
+                            <input type="password" name="password2" id="password2" required/>
+                            </div>
+                        <div class="form-submit">
+                            <input type="submit" value="Submit Form" class="submit" name="submit" id="submit" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="{% static 'signup/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'signup/js/main.js' %}"></script>
+    <script src="{% static 'signup/js/validate.js' %}"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

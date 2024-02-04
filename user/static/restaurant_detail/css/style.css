@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap');
+
+
+#signInButton{
+  background-color: #7fb401;
+}
+
+.rest_name{
+    font-family: 'Rubik Doodle Shadow', system-ui;
+    font-size: 100px;
+}
+
+/* === CARD SECTION === */
+
+.card{
+
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+.card:hover{
+
+    box-shadow: 3px 4px 4px 2px #e9ecef;
+    transform: scale(1.03);
+}
+
+/* === CARD SECTION ENDS === */
+
+/*
+* 
+* ==========================================
+* NAVBAR
+* ==========================================
+*
+*/
+.navbar {
+    transition: all 0.3s;
+  }
+  
+  .navbar .nav-link {
+    transition: all 0.3s;
+  }
+  
+  @media (min-width: 992px) {
+    .navbar .nav-link {
+      padding: 2rem 0.5rem;
+      border-top: 2px solid transparent;
+    }
+  }
+  
+  .navbar .nav-link.active {
+    border-color: #7fb401;
+  }
+  
+  .navbar-toggler {
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  @media (min-width: 992px) {
+    .navbar.active .nav-link {
+      padding: 1.5rem 0.5rem;
+    }
+  }
+  
+  .navbar.active {
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  }
+
+/* ==== ICON ==== */
+
+.icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dotted #ced4da;
+  transition: all 0.3s;
+  border-radius: 50%;
+  background-color: #7fb401;
+
+}
+
+.icon i {
+  font-size: 1.4rem;
+  color: #ced4da;
+  transition: all 0.3s;
+}
+
+.icon-sm {
+  width: 50px;
+  height: 50px;
+}
+
+.icon-md {
+  width: 64px;
+  height: 64px;
+}
+
+.border-primary {
+  border-color: #7fb401 !important;
+}
+.border {
+  border: 1px solid #dee2e6 !important;
+}
+
+
+/* === Gallery ==== */
+
+section {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-auto-rows: 300px;
+  grid-gap: 20px;
+  margin: 0 auto;
+  max-width: 1000px;
+  padding: 30px;
+}
+
+figure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  transform: translateY(0);
+}
+
+.img {
+  /* width: 100%; */
+  height: 100%;
+  object-fit:contain;
+  transform: translateZ(0);
+}
+
+/* Hover transitions */
+figure:hover {
+  transform: translateY(-6px);
+  box-shadow: rgba(black, 0.5) 0 12px 24px -12px;
+
+}

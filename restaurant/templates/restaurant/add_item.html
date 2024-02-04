@@ -1,0 +1,33 @@
+{% extends 'restaurant/base.html'%}
+
+{% block main_block%}
+
+
+
+<div class="container" style="margin-top: 125px;">
+    {% if messages %}
+        {% for m in messages %}
+        <div class="alert alert-success d-flex align-items-center" role="alert">
+            <div>
+              {{m}}
+            </div>
+        </div>
+        {% endfor %}
+    {% endif %}
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-md-8">
+            <div class="border border-black border-3 shadow rounded-4 p-4">
+                <form method="post" enctype="multipart/form-data">
+                    {%csrf_token%}
+                    <h1 class="text-center">ADD ITEM</h1> 
+                    <div class="mt-4">
+                        {{form.as_p}}
+                        
+                    </div>
+                    <button type="submit" class="btn rounded-pill btn-danger mt-3">Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

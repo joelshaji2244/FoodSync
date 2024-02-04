@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>FoodSync</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="all,follow">
+        <!-- Swiper.js-->
+        <link rel="stylesheet" href="{% static 'base_page/vendor/swiper/swiper-bundle.css' %}">
+        <!-- gLightbox-->
+        <link rel="stylesheet" href="{% static 'base_page/vendor/glightbox/css/glightbox.css' %}">
+        <!-- air datepicker-->
+        <link rel="stylesheet" href="{% static 'base_page/vendor/air-datepicker/air-datepicker.css' %}">
+        <!-- Leaflet-->
+        <link rel="stylesheet" href="{% static 'base_page/vendor/leaflet/leaflet.css' %}">
+        <!-- google font - dancing script for headings | pt sans for copy-->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dancing+Script:400,700|PT+Serif:400,400i,700">
+        <!-- theme stylesheet-->
+        <link rel="stylesheet" href="{% static 'base_page/css/style.default.css' %}" id="theme-stylesheet">
+        <!-- Custom stylesheet - for your changes-->
+        <link rel="stylesheet" href="{% static 'base_page/css/custom.css' %}">
+        <!-- Favicon-->
+        <link rel="shortcut icon" href="{% static 'base_page/img/favicon.ico' %}">
+        <!-- FontAwesome -->
+        <script src="https://kit.fontawesome.com/e6397dcf5f.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        
+    </head>
+    <!-- Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top py-lg-0" id="navbar">
+        <div class="container-fluid"><a class="navbar-brand" href="index.html"> <img src="{% static 'base_page/img/FoodSync_logo.png' %}" alt="FoodSync" width="200px" height="80"></a>
+        <button class="navbar-toggler p-0 shadow-0 border-0 text-black" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="fw-bold mb-0 text-uppercase">Menu</span><span class="navbar-toggler-icon ms-2"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+            <li class="nav-item"><a class="nav-link active" href="{% url 'user_index' %}">Home</a></li>
+            {% for c in cart %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'cart_list' %}"><i class="cart fa badge fa-lg" value="{{c.cart_item_count}}" style="color: #4a4a4a;">&#xf07a;</i></li></a>
+            {% endfor %}
+            {% if not user.is_authenticated %}
+            <li class="nav-item ms-lg-2">
+              <a href="{% url 'user_signin' %}"><button id="signInButton" class="btn btn-sm d-none d-lg-inline-block" type="button" data-bs-toggle="modal" data-bs-target="#reservationModal">SignIn</button></a>
+            </li>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <li class="nav-item  ms-lg-2">
+                <a href="{% url 'user_logout' %}"><button class="btn btn-sm btn-warning d-none d-lg-inline-block" type="button" data-bs-toggle="modal" data-bs-target="">Logout</button></a>
+            </li>
+            {% endif %}
+            </ul>
+        </div>
+        </div>
+    </nav>
+    <!-- End Navbar-->
+
+    {% block main_block %}
+
+    {% endblock %}
+
+    <!-- Footer-->
+    <footer id="contact" class="footer text-gray-700">
+        <div class="container">
+          <div class="row gy-4 mb-5">
+            <div class="col-md-4"><img class="mb-4" src="{% static 'base_page/img/logo-footer.png' %}" alt="italiano" width="100">
+              <p class="text-sm">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+            </div>
+            <div class="col-md-4">
+              <h6 class="h5 text-white text-uppercase mb-4 underline">Contact</h6>
+              <ul class="list-unstyled text-gray-700">
+                <li class="mb-2"><i class="fas fa-map-marker-alt text-primary me-2 fa-fw"></i>Basioun, 23 July st, Egypt</li>
+                <li class="mb-2"><a class="text-reset" href="mailto:Italiano@Company.com"><i class="fas fa-envelope text-primary me-2 fa-fw"></i>Italiano@Company.com</a></li>
+                <li class="mb-2"><i class="fas fa-phone text-primary me-2 fa-fw"></i>9465 7675 294</li>
+                <li><i class="fas fa-fax text-primary me-2 fa-fw"></i>333-999-666</li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <h6 class="h5 text-white text-uppercase mb-4 underline">Newsletter</h6>
+              <p class="text-sm mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmo.</p>
+              <form id="subscribe">
+                <div class="input-group">
+                  <input class="form-control" type="email" name="email" placeholder="Enter Your Email Address">
+                  <button class="btn btn-primary" type="submit">Subscribe</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <ul class="social list-inline text-center mb-0 text-white">
+            <li class="list-inline-item mx-2"><a class="text-reset" href="#!" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+            <li class="list-inline-item mx-2"><a class="text-reset" href="#!" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+            <li class="list-inline-item mx-2"><a class="text-reset" href="#!" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a></li>
+            <li class="list-inline-item mx-2"><a class="text-reset" href="#!" target="_blank" title="Pinterest"><i class="fab fa-pinterest"></i></a></li>
+            <li class="list-inline-item mx-2"><a class="text-reset" href="#!" target="_blank" title="Skype"><i class="fab fa-skype"></i></a></li>
+          </ul>
+        </div>
+      </footer>
+      <!-- Copyrights -->
+      <div class="copyrights py-4 text-gray-700">
+        <div class="container">
+          <div class="row gy-3 text-center">
+            <div class="col-md-5 text-lg-start">
+              <ul class="list-inline mb-0 small">
+                <li class="list-inline-item"><a class="text-reset" href="#!">Policy Privacy</a></li>
+                <li class="list-inline-item"><a class="text-reset" href="#!">Terms of Use</a></li>
+                <li class="list-inline-item"><a class="text-reset" href="#!">Contact</a></li>
+              </ul>
+            </div>
+            <div class="col-md-7 text-lg-end">
+              <p class="mb-0 small">© 2022, Italiano Restaurant. Template By <a href="https://bootstrapious.com/p/bootstrap-sidebar" target="_blank">Bootstrapious</a></p>
+              <!-- Please do not remove the backlink to us unless you have purchased the attribution-free license at https://bootstrapious.com. It is part of the license conditions. Thanks for understanding :)-->
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- End Footer-->
